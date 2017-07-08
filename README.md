@@ -1,4 +1,4 @@
-ud120-projects
+#Machine Learning Mini Projects
 ==============
 
-Starter project code for students taking Udacity ud120
+Starter mini projects regarding machine learning
