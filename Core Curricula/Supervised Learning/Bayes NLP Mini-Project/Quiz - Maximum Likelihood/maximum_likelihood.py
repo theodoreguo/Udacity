@@ -27,7 +27,7 @@ def NextWordProbability(sampletext,word):
             nextWord = splittedText[i + 1]
             if not lookup.has_key(nextWord):
                 lookup[nextWord] = 0
-            else:
-                lookup[nextWord] = lookup[nextWord]  + 1
+
+            lookup[nextWord] = lookup[nextWord]  + 1
 
     return lookup
