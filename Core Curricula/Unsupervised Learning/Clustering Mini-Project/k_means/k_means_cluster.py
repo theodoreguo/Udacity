@@ -43,6 +43,10 @@ data_dict = pickle.load( open("../final_project/final_project_dataset.pkl", "r")
 ### there's an outlier--remove it!
 data_dict.pop("TOTAL", 0)
 
+salary = [item["salary"] for k, item in data_dict.iteritems() if not item["salary"] == "NaN"]
+print "min is %s" % min(salary)
+print "max is %s" % max(salary)
+
 exercised_stock_options = [item["exercised_stock_options"] for k, item in data_dict.iteritems() if not item["exercised_stock_options"] == "NaN"]
 print "min is %s" % min(exercised_stock_options)
 print "max is %s" % max(exercised_stock_options)
