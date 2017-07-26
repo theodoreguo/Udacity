@@ -15,7 +15,17 @@ sys.path.append("../tools/")
 from feature_format import featureFormat, targetFeatureSplit
 
 
+def featureScaling(data):
+    data = numpy.array(data, dtype=float)
+    max = numpy.max(data)
+    min = numpy.min(data)
 
+    result = []
+
+    for i in data:
+        result.append((i - min) / (max - min))
+
+    return result
 
 def Draw(pred, features, poi, mark_poi=False, name="image.png", f1_name="feature 1", f2_name="feature 2"):
     """ some plotting code designed to help you visualize your clusters """
@@ -59,6 +69,7 @@ feature_3 = "total_payments"
 poi  = "poi"
 features_list = [poi, feature_1, feature_2, feature_3]
 data = featureFormat(data_dict, features_list )
+data = featureScaling( data )
 poi, finance_features = targetFeatureSplit( data )
 
 
@@ -72,8 +83,10 @@ plt.show()
 
 ### cluster here; create predictions of the cluster labels
 ### for the data and store them to a list called pred
-
-
+from sklearn.cluster import KMeans
+cluster = KMeans(n_clusters=3)
+cluster.fit(finance_features)
+pred = cluster.predict(finance_features)
 
 
 ### rename the "name" parameter when you change the number of features
