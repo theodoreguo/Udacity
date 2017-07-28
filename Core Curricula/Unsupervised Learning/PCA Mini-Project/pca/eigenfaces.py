@@ -112,6 +112,12 @@ print confusion_matrix(y_test, y_pred, labels=range(n_classes))
 
 
 ###############################################################################
+# How much of the variance is explained by the first principal component? The second?
+print(pca.explained_variance_ratio_[0])
+print(pca.explained_variance_ratio_[1])
+
+
+###############################################################################
 # Qualitative evaluation of the predictions using matplotlib
 
 def plot_gallery(images, titles, h, w, n_row=3, n_col=4):
