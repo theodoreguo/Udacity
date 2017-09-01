@@ -1,7 +1,7 @@
 # Machine Learning Engineer Nanodegree
 ## Capstone Project
 Zitong Guo  
-Septemper 3rd, 2017
+September 3rd, 2017
 
 ## I. Definition
 
@@ -34,7 +34,7 @@ The evaluation metric for this problem is straightforward and simple. It is base
 ## II. Analysis
 
 ### Data Exploration
-The input dataset of this project is 2 CSV files for `train` and `test`. It's known that for the training set, we are given the entire sequence and for the test set the final element has been removed, which is the target we are trying to predict.
+The input dataset of this project is two CSV files for `train` and `test`. It's known that for the training set, we are given the entire sequence and for the test set the final element has been removed, which is the target we are trying to predict.
 
 Firstly, we explore the training to understand the details using R. 
 
@@ -103,11 +103,17 @@ We can see that the test set also has 113,845 sequences indicated by `Id`.
 Hence, it's learned that we are provided with 227,690 sequences in total from the OEIS, split 50% to 50% into a training and test set. 
 
 ### Exploratory Visualization
-In this section, you will need to provide some form of visualization that summarizes or extracts a relevant characteristic or feature about the data. The visualization should adequately support the data being used. Discuss why this visualization was chosen and how it is relevant. Questions to ask yourself when writing this section:
+The sequences are made up of a linear sequences, logarithmic sequences, sequences with a modulus, and many other oddities.
+Firstly, we count all numbers in both sets, and then based on that to generate the illustrations regarding the count of numbers in each sequence versus its frequency in the dataset. 
 
-- _Have you visualized a relevant characteristic or feature about the dataset or input data?_
-- _Is the visualization thoroughly analyzed and discussed?_
-- _If a plot is provided, are the axes, title, and datum clearly defined?_
+The details of this feature of both training set and test set are shown as follows:
+
+![](Images/Histogram of train_numbers_count.png)
+![](Images/Histogram of test_numbers_count.png)
+
+To get an idea of what kind of dataset we are working with, we can illustrate some of these sequences after merging training set and test set together and making all the sequences sorted by Id in ascending order. The first 100 sequences are shown below. Please note that the data are on a log scale.
+
+![](Images/First 100 Sequences on Log Scale.png)
 
 ### Algorithms and Techniques
 In this section, you will need to discuss the algorithms and techniques you intend to use for solving the problem. You should justify the use of each one based on the characteristics of the problem and the problem domain. Questions to ask yourself when writing this section:
