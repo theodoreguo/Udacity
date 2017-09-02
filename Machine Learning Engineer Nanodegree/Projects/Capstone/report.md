@@ -111,7 +111,7 @@ The details of this feature of both training set and test set are shown as follo
 ![](Images/Histogram of train_numbers_count.png)
 ![](Images/Histogram of test_numbers_count.png)
 
-To get an idea of what kind of dataset we are working with, we can illustrate some of these sequences after merging training set and test set together and making all the sequences sorted by Id in ascending order. The first 100 sequences are shown below. Please note that the data are on a log scale.
+To get an idea of what kind of dataset we are working with, we can illustrate some of these sequences after merging training set and test set together and making all the sequences sorted by Id in ascending order. The first 100 sequences are shown below. Please note that the data is on a log scale.
 
 ![](Images/First 100 Sequences on Log Scale.png)
 
