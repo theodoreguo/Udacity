@@ -155,11 +155,112 @@ Reading the provided CSV file produces a data frame of two variables, Id and Seq
 In addition, the train.csv file will be divided into a training set and a validation set.
 
 ### Implementation
-In this section, the process for which metrics, algorithms, and techniques that you implemented for the given data will need to be clearly documented. It should be abundantly clear how the implementation was carried out, and discussion should be made regarding any complications that occurred during this process. Questions to ask yourself when writing this section:
+During the training classifer stage, the classifier was trained on the preprocessed training data. The specific implementation is shown below. The data set are read from the CSV file and then saved to disk as Python pickle file to be loaded for training the model.
+ 
+```python
+# Mapping each character with the indicated index
+def load_vocab():
+    vocab = 'E,-0123456789' # E:zero-padding
+    digit2idx = {digit:idx for idx, digit in enumerate(vocab)}
+    idx2digit = {idx:digit for idx, digit in enumerate(vocab)}
+    
+    return digit2idx, idx2digit 
+    
+def create_train_data():
+    digit2idx, idx2digit = load_vocab()
 
-- _Is it made clear how the algorithms and techniques were implemented with the given datasets or input data?_
-- _Were there any complications with the original metrics or techniques that required changing prior to acquiring a solution?_
-- _Was there any part of the coding process (e.g., writing complicated functions) that should be documented?_
+    train_lines = [line.split('"')[1] for line in \
+    open('../data/train.csv', 'r').read().splitlines()[1:]]
+    test_lines = [line.split('"')[1] for line in \
+    open('../data/test.csv', 'r').read().splitlines()[1:]]
+            
+    xs0, xs1, xs2, xs3 = [], [], [], []
+    ys0, ys1, ys2, ys3 = [], [], [], []
+    for i, line in enumerate(train_lines + test_lines):
+        digits = line[-Hyperparams.maxlen:] 
+
+        # Numbers consisting of more than five digits are excluded
+        # to avoid disturbing the training process
+        isvalid = True
+        for num in digits.split(","):
+            if len(num) > 5:
+                isvalid = False
+                break
+        if not isvalid:
+            continue
+        
+        x = [digit2idx[digit] for digit in digits]
+        y = [digit2idx[digit] for digit in (digits[1:] + ",")]
+
+        # Data Bucketing
+        if len(x) <= 100:
+            x += [0] * (100 - len(x)) # Zero postpadding
+            y += [0] * (100 - len(y)) # Zero postpadding
+            xs0.append(x); ys0.append(y)
+        elif len(x) <= 200:
+            x += [0] * (200 - len(x)) # Zero postpadding
+            y += [0] * (200 - len(y)) # Zero postpadding
+            xs1.append(x); ys1.append(y)
+        elif len(x) <= 300:
+            x += [0] * (300 - len(x)) # Zero postpadding
+            y += [0] * (300 - len(y)) # Zero postpadding
+            xs2.append(x); ys2.append(y)
+        else:
+            x += [0] * (400 - len(x)) # Zero postpadding
+            y += [0] * (400 - len(y)) # Zero postpadding
+            xs3.append(x); ys3.append(y)
+
+    X = [np.array(xs0), np.array(xs1), np.array(xs2), np.array(xs3)]   
+    Y = [np.array(ys0), np.array(ys1), np.array(ys2), np.array(ys3)]
+
+    pickle.dump((X, Y), open('../data/train.pkl', 'wb'))
+    
+def load_train_data(num):
+    X, Y = pickle.load(open('../data/train.pkl', 'rb'))
+    return X[num], Y[num]
+```
+
+The training model is implemented in Python as shown below. 
+
+```python
+def build_model(seqlen):
+    sequence = Input(shape=(seqlen,), dtype="int32")
+    embedded = Embedding(13, 300, mask_zero=True)(sequence)
+    gru1 = GRU(1000, return_sequences=True)(embedded)
+    after_dp = Dropout(0.5)(gru1)
+    gru2 = GRU(1000, return_sequences=True)(after_dp)
+    after_dp = Dropout(0.5)(gru2)
+    output = TimeDistributed(Dense(13, activation="softmax"))(after_dp)
+    
+    model = Model(inputs=sequence, outputs=output)
+    
+    return model
+```
+
+The network architecture is "Inputs -> GRU Layer 1 of 1000 hidden units -> Dropout -> GRU Layer 2 of 1000 hidden units -> Dropout -> Time distributed dense -> Outputs".
+
+After that, the classifier is trained on the preprocessed training data as described above. And then we do necessary predictions based on the training model.
+
+```python
+for epoch in range(0, 30):
+    for subepoch in range(4):
+        num = epoch % 4
+        
+        # Load training data set
+        X, Y = load_train_data(num)
+        Y = np.expand_dims(Y, -1)
+        
+        # Build model
+        seqlen = X.shape[1]        
+        model = build_model(seqlen)
+        
+        # Compile model
+        model.compile('adam', 'sparse_categorical_crossentropy', \
+        metrics=['accuracy'])
+        
+        # Train model
+        model.fit(X, Y, batch_size=64, epochs=1)
+```
 
 ### Refinement
 In this section, you will need to discuss the process of improvement you made upon the algorithms and techniques you used in your implementation. For example, adjusting parameters for certain models to acquire improved solutions would fall under the refinement category. Your initial and final solutions should be reported, as well as any significant intermediate results as necessary. Questions to ask yourself when writing this section:
