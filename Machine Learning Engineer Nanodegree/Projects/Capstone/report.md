@@ -300,11 +300,10 @@ I found that training the classifier using the data input was the most difficult
 As for the most interesting aspects of the project, I’m very delighted that I used RNNs to deal with this problem as I think it will be quite useful for later projects/experiments. I’m also happy about getting to use TensorFlow and Keras, as they are the most popular deep learning libraries in AI field.
 
 ### Improvement
-In this section, you will need to provide discussion as to how one aspect of the implementation you designed could be improved. As an example, consider ways your implementation can be made more general, and what would need to be modified. You do not need to make this improvement, but the potential solutions resulting from these changes are considered and compared/contrasted to your current solution. Questions to ask yourself when writing this section:
+With ample time, this investigation could be expanded by experimenting with the effects of adding more GRU layers to the classifier until it starts to overfit the training set there and arrive at a tipping point at which it loses accuracy. 
 
-- _Are there further improvements that could be made on the algorithms or techniques you used in this project?_
-- _Were there algorithms or techniques you researched that you did not know how to implement, but would consider using if you knew how?_
-- _If you used your final solution as the new benchmark, do you think an even better solution exists?_
+In addition, the parameters such as the dimensionality of the output space, activation function can be modified to achieve the optimal training model.
+Other classifiers are always fair contestants when trying to tackle such scale issues with larger datasets. For instance, Long Short Term Memory (LSTM) networks would be a good candidate to investigate. In addition, [Natural Language Toolkit (NLTK)](http://www.nltk.org/ "Click to visit") would be a good choice to implement NLP related projects.
 
 -----------
 
