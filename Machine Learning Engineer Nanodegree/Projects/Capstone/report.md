@@ -145,14 +145,13 @@ Mode <- function(x) {
 ```
 
 The top 20 accuracy scores of the competition leaderboard range between 0.20 - 0.59 (excluding an outlier in first place with a score of 0.98).
-To be able to predict the last term with an accuracy score above 0.20 would be satisfactory, above 0.30 (top 10) would be great, and above 0.40 (top 3) would be outstanding.
+
+To be able to predict the last term with an accuracy score above 0.20 would be satisfactory, above 0.30 (top 10) would be great, and above 0.40 (top 3) would be outstanding.
 
 ## III. Methodology
 
 ### Data Preprocessing
 Reading the provided CSV file produces a data frame of two variables, Id and Sequence. The Id variables are integers, and are exactly how we want them. The Sequence variable is in strings, so we will need to convert that to a list a of numbers. Combining the use of `splitlines()` and `split()` function is a simple way to make it.
-
-In addition, the train.csv file will be divided into a training set and a validation set.
 
 ### Implementation
 During the training classifer stage, the classifier was trained on the preprocessed training data. The specific implementation is shown below. The data set are read from the CSV file and then saved to disk as Python pickle file to be loaded for training the model.
@@ -160,7 +159,7 @@ During the training classifer stage, the classifier was trained on the preproces
 ```python
 # Mapping each character with the indicated index
 def load_vocab():
-    vocab = 'E,-0123456789' # E:zero-padding
+    vocab = 'E,-0123456789'
     digit2idx = {digit:idx for idx, digit in enumerate(vocab)}
     idx2digit = {idx:digit for idx, digit in enumerate(vocab)}
     
@@ -177,7 +176,7 @@ def create_train_data():
     xs0, xs1, xs2, xs3 = [], [], [], []
     ys0, ys1, ys2, ys3 = [], [], [], []
     for i, line in enumerate(train_lines + test_lines):
-        digits = line[-Hyperparams.maxlen:] 
+        digits = line[-400:] 
 
         # Numbers consisting of more than five digits are excluded
         # to avoid disturbing the training process
