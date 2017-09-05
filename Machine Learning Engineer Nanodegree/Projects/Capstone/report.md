@@ -31,6 +31,7 @@ The [Recurrent Neural Networks](https://en.wikipedia.org/wiki/Recurrent_neural_n
 ### Metrics
 The evaluation metric for this problem is straightforward and simple. It is based on the accuracy of the predictions (the percentage of sequences where the next number is predicted correctly).
 
+
 ## II. Analysis
 
 ### Data Exploration
@@ -148,6 +149,7 @@ The top 20 accuracy scores of the competition leaderboard range between 0.20 - 0
 
 To be able to predict the last term with an accuracy score above 0.20 would be satisfactory, above 0.30 (top 10) would be great, and above 0.40 (top 3) would be outstanding.
 
+
 ## III. Methodology
 
 ### Data Preprocessing
@@ -167,7 +169,8 @@ def load_vocab():
     
 def create_train_data():
     digit2idx, idx2digit = load_vocab()
-
+    
+	# Vectorize
     train_lines = [line.split('"')[1] for line in \
     open('../data/train.csv', 'r').read().splitlines()[1:]]
     test_lines = [line.split('"')[1] for line in \
@@ -245,7 +248,7 @@ for epoch in range(0, 30):
     for subepoch in range(4):
         num = epoch % 4
         
-        # Load training data set
+        # Load training set
         X, Y = load_train_data(num)
         Y = np.expand_dims(Y, -1)
         
@@ -262,11 +265,9 @@ for epoch in range(0, 30):
 ```
 
 ### Refinement
-In this section, you will need to discuss the process of improvement you made upon the algorithms and techniques you used in your implementation. For example, adjusting parameters for certain models to acquire improved solutions would fall under the refinement category. Your initial and final solutions should be reported, as well as any significant intermediate results as necessary. Questions to ask yourself when writing this section:
+As mentioned in the Implementation section, the network architecture includes two GRU layers with dropout after each one. But initially the network architecture just has one GRU layer without dropout, which will have an accuracy of below 0.10. To deal with this, one more GRU layer is added while appending dropout function after each GRU layer. Dropout will randomly drop weights in the layer it’s applied to during training and scales the weights so that the network keeps working during inference.
 
-- _Has an initial solution been found and clearly reported?_
-- _Is the process of improvement clearly documented, such as what techniques were used?_
-- _Are intermediate and final solutions clearly reported as the process is improved?_
+After the optimization, the final model is derived by subsequent training process which will have an accuracy of around 0.13 (the details will be discussed in next section).
 
 
 ## IV. Results
