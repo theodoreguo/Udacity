@@ -37,7 +37,7 @@ The evaluation metric for this problem is straightforward and simple. It is base
 ### Data Exploration
 The input dataset of this project is two CSV files for `train` and `test`. It's known that for the training set, we are given the entire sequence and for the test set the final element has been removed, which is the target we are trying to predict.
 
-Firstly, we explore the training to understand the details using R. 
+Firstly, we explore the training set to understand the details using R. 
 
 ```r
 train <- read.csv("train.csv")
