@@ -10,23 +10,23 @@ Given an integer sequence: 1, 2, 3, 4, 5, ?
 
 So what is the next number?
 
-7! You read that correctly. That's the start to a real integer sequence, the [powers of primes](https://oeis.org/A000961 "Click to check"). Want something easier? How about the next number in 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, ? If you answered 89, you may enjoy this challenge. Your computer may find it considerably less enjoyable. In this project, a machine learning solution will be demonstated to predict the next number of a given integer sequence.
+7! You read that correctly. That's the start to a real integer sequence, the [powers of primes](https://oeis.org/A000961 "Click to check")[^fn1]. Want something easier? How about the next number in 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, ? If you answered 89, you may enjoy this challenge. Your computer may find it considerably less enjoyable. In this project, a machine learning solution will be demonstated to predict the next number of a given integer sequence.
 
-A number in a sequence is equivalent to a word. Based on this observation, we try to predict the last number based on the preceding numbers. Hence, the problem can be treated as the [Natural Language Processing (NLP)](https://en.wikipedia.org/wiki/Natural_language_processing "Click to check") domain.
+A number in a sequence is equivalent to a word. Based on this observation, we try to predict the last number based on the preceding numbers. Hence, the problem can be treated as the [Natural Language Processing (NLP)](https://en.wikipedia.org/wiki/Natural_language_processing "Click to check")[^fn2] domain.
 
 ### Problem Statement
-This problem at hand is defined by Kaggle team's competition named [Integer Sequence Learning](https://www.kaggle.com/c/integer-sequence-learning "Click to visit"). It challenges you create a machine learning algorithm capable of guessing the next number in an integer sequence. While this sounds like pattern recognition in its most basic form, a quick look at the data will convince you this is anything but basic!
+This problem at hand is defined by [Kaggle](https://www.kaggle.com/ "Click to visit")[^fn3] team's competition named [Integer Sequence Learning](https://www.kaggle.com/c/integer-sequence-learning "Click to visit")[^fn4]. It challenges you create a machine learning algorithm capable of guessing the next number in an integer sequence. While this sounds like pattern recognition in its most basic form, a quick look at the data will convince you this is anything but basic!
 
 ### Datasets and Inputs
-The [dataset](https://www.kaggle.com/c/integer-sequence-learning/data "Click to download dataset") of this project contains the majority of the integer sequences from the [On-Line Encyclopedia of Integer Sequences® (OEIS®)](https://oeis.org/ "Click to visit"). It is split into a training set, where you are given the full sequence, and a test set, where we have removed the last number from the sequence. The task is to predict this removed integer.
+The [dataset](https://www.kaggle.com/c/integer-sequence-learning/data "Click to download dataset")[^fn5] of this project contains the majority of the integer sequences from the [On-Line Encyclopedia of Integer Sequences® (OEIS®)](https://oeis.org "Click to visit")[^fn6]. It is split into a training set, where you are given the full sequence, and a test set, where we have removed the last number from the sequence. The task is to predict this removed integer.
 
 Note that some sequences may have identical beginnings (or even be identical altogether). They have not been removed these from the dataset.
 
 ### Solution Statement
-The [Recurrent Neural Networks](https://en.wikipedia.org/wiki/Recurrent_neural_network "Click to check") approach – usually just called "RNNs" - can be applied to solve this problem. This task particularly interests me as it's analogous to word prediction. Hence integers are treated as words in the solution.
+The [Recurrent Neural Networks](https://en.wikipedia.org/wiki/Recurrent_neural_network "Click to check")[^fn7] approach – usually just called "RNNs" - can be applied to solve this problem. This task particularly interests me as it's analogous to word prediction. Hence integers are treated as words in the solution.
 
 ### Benchmark Model
-The `Mode` methodology is used as the benchmark model for the last number prediction in a certain sequence. For this, we simply find the mode in a given sequence, and that will be our guess for the last term in the sequence. The Mode Benchmark (implemented in R) seen on the competiton [leaderboard](https://www.kaggle.com/c/integer-sequence-learning/leaderboard "Click to check") has an accuracy of `0.05746`.
+The `Mode` methodology is used as the benchmark model for the last number prediction in a certain sequence. For this, we simply find the mode in a given sequence, and that will be our guess for the last term in the sequence. The Mode Benchmark (implemented in R) seen on the competiton [leaderboard](https://www.kaggle.com/c/integer-sequence-learning/leaderboard "Click to check")[^fn8] has an accuracy of `0.05746`.
 
 ```r
 Mode <- function(x) {
@@ -81,10 +81,20 @@ It's obersed that each row of the data contains `Id` and `Sequence`. There are t
 Reading the provided CSV file produces a data frame of two variables, Id and Sequence. The Id variables are integers, and are exactly how we want them. The Sequence variable is in strings, so we will need to convert that to a list of numbers. Relative methods to deal with this kind of scenarios will be applied.
 
 #### Build and Train Model
-As mentioned above, a number in a sequence is equivalent to a word. Based on this observation, we try to predict the last number based on the preceding numbers. Hence, the problem can be treated as the [Natural Language Processing (NLP)](https://en.wikipedia.org/wiki/Natural_language_processing "Click to check") domain. 
+As mentioned above, a number in a sequence is equivalent to a word. Based on this observation, we try to predict the last number based on the preceding numbers. Hence, the problem can be treated as the Natural Language Processing (NLP) domain. 
 
-It's known that RNNs can use their internal memory to process arbitrary sequences of inputs. This makes them applicable to tasks such as unsegmented, connected [handwriting recognition](https://en.wikipedia.org/wiki/Handwriting_recognition "Click to check") or [speech recognition](https://en.wikipedia.org/wiki/Speech_recognition "Click to visit"). Hence, the RNNs approach will be applied in the project to handle the NLP domain problem.
+It's known that RNNs can use their internal memory to process arbitrary sequences of inputs. This makes them applicable to tasks such as unsegmented, connected handwriting recognition or speech recognition. Hence, the RNNs approach will be applied in the project to handle the NLP domain problem.
 
 #### Model Evaluation
 The prdiction accuracy (i.e., the percentage of sequences where the next number is predicted correctly) can be applied to evaluate the designed model.
-The big question of this investigation, is whether this model can be used to predict the last term of a given sequence accurately. As the nature of the challenge was a contest, the predictions created by the model will be submitted online on [Kaggle](https://www.kaggle.com "Click to visit") for a blind evaluation and then returned an accuracy score.
+
+The big question of this investigation, is whether this model can be used to predict the last term of a given sequence accurately. As the nature of the challenge was a contest, the predictions created by the model will be submitted online on Kaggle for a blind evaluation and then returned an accuracy score.
+
+[^fn1]: "Powers of primes. Alternatively, 1 and the prime powers (p^k, p prime, k >= 1). (Formerly M0517 N0185)", _https://oeis.org/A000961_
+[^fn2]: Natural language processing from Wikipedia, the free encyclopedia, _https://en.wikipedia.org/wiki/Natural_language_processing_
+[^fn3]: Kaggle Official Website, _https://www.kaggle.com_
+[^fn4]: Kaggle Integer Sequence Learning Competition, _https://www.kaggle.com/c/integer-sequence-learning_
+[^fn5]: Kaggle Integer Sequence Learning Dataset, _https://www.kaggle.com/c/integer-sequence-learning/data_
+[^fn6]: On-Line Encyclopedia of Integer Sequences® (OEIS®) Official Website, _https://oeis.org_
+[^fn7]: Recurrent Neural Networks from Wikipedia, the free encyclopedia, _https://en.wikipedia.org/wiki/Recurrent_neural_network_
+[^fn8]: Kaggle Integer Sequence Learning Competition Leaderboard, _https://www.kaggle.com/c/integer-sequence-learning/leaderboard_
