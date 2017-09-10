@@ -159,7 +159,7 @@ Reading the provided CSV file produces a data frame of two variables, Id and Seq
 During the training classifer stage, the classifier was trained on the preprocessed training data. The specific implementation is shown below. The dataset is read from the CSV file and then saved to disk as Python pickle file to be loaded for training the model subsequently.
  
 ```python
-# Mapping each character with the indicated index
+# Map each character with the indicated index
 def load_vocab():
     vocab = 'E,-0123456789'
     digit2idx = {digit:idx for idx, digit in enumerate(vocab)}
