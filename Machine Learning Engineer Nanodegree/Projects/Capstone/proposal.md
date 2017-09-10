@@ -28,29 +28,6 @@ This problem at hand is defined by [Kaggle](https://www.kaggle.com/ "Click to vi
 ### Datasets and Inputs
 The [dataset](https://www.kaggle.com/c/integer-sequence-learning/data "Click to download dataset")[^fn5] of this project contains the majority of the integer sequences from the [On-Line Encyclopedia of Integer Sequences® (OEIS®)](https://oeis.org "Click to visit")[^fn6]. It is split into a training set, where you are given the full sequence, and a test set, where we have removed the last number from the sequence. The task is to predict this removed integer.
 
-Note that some sequences may have identical beginnings (or even be identical altogether). They have not been removed these from the dataset.
-
-### Solution Statement
-The [Recurrent Neural Networks](https://en.wikipedia.org/wiki/Recurrent_neural_network "Click to check")[^fn7] approach – usually just called "RNNs" - can be applied to solve this problem. This task particularly interests me as it's analogous to word prediction. Hence integers are treated as words in the solution.
-
-### Benchmark Model
-The `Mode` methodology is used as the benchmark model for the last number prediction in a certain sequence. For this, we simply find the mode in a given sequence, and that will be our guess for the last term in the sequence. The Mode Benchmark (implemented in R) seen on the competiton [leaderboard](https://www.kaggle.com/c/integer-sequence-learning/leaderboard "Click to check")[^fn8] has an accuracy of `0.05746`.
-
-```r
-Mode <- function(x) {
-	ux <- unique(x)
-  	ux[which.max(tabulate(match(x, ux)))]
-}
-```
-The top 20 accuracy scores of the competition leaderboard range between 0.20 - 0.59 (excluding an outlier in first place with a score of 0.98).
-
-### Evaluation Metrics
-The evaluation metric for this problem is straightforward and simple. It is based on the accuracy of the predictions (the percentage of sequences where the next number is predicted correctly).
-
-### Project Design
-In this final section, summarize a theoretical workflow for approaching a solution given the problem. Provide thorough discussion for what strategies you may consider employing, what analysis of the data might be required before being used, or which algorithms will be considered for your implementation. The workflow and discussion that you provide should align with the qualities of the previous sections. Additionally, you are encouraged to include small visualizations, pseudocode, or diagrams to aid in describing the project design, but it is not required. The discussion should clearly outline your intended workflow of the capstone project.
-
-#### Data Exploration
 The input dataset of this project is two CSV files for `train` and `test`. It's known that for the training set, we are given the entire sequence and for the test set the final element has been removed, which is the target we are trying to predict.
 
 We explore the training set to understand the characteristics of the datasets using R.
@@ -84,6 +61,26 @@ head(train)
 ## 6  1,1,1,1,1,1,1,1,1,5,1,1,1,1,5,5,1,1,1,1,11,5,5,11,5,1,1,1,1,5,23,5,23,5,5,1,1,1,1,21,5,39,5,5,39,5,21,5,1,1,1,1,5,1,17,1,17,1,1,5,1,1,1,1,31,5,5,29,1,1,29,1,5
 ```
 It's obersed that each row of the data contains `Id` and `Sequence`. There are totally 113,845 sequences indicated by `Id`.
+
+### Solution Statement
+The [Recurrent Neural Networks](https://en.wikipedia.org/wiki/Recurrent_neural_network "Click to check")[^fn7] approach – usually just called "RNNs" - can be applied to solve this problem. This task particularly interests me as it's analogous to word prediction. Hence integers are treated as words in the solution.
+
+### Benchmark Model
+The `Mode` methodology is used as the benchmark model for the last number prediction in a certain sequence. For this, we simply find the mode in a given sequence, and that will be our guess for the last term in the sequence. The Mode Benchmark (implemented in R) seen on the competiton [leaderboard](https://www.kaggle.com/c/integer-sequence-learning/leaderboard "Click to check")[^fn8] has an accuracy of `0.05746`.
+
+```r
+Mode <- function(x) {
+	ux <- unique(x)
+  	ux[which.max(tabulate(match(x, ux)))]
+}
+```
+The top 20 accuracy scores of the competition leaderboard range between 0.20 - 0.59 (excluding an outlier in first place with a score of 0.98).
+
+### Evaluation Metrics
+The evaluation metric for this problem is straightforward and simple. It is based on the accuracy of the predictions (the percentage of sequences where the next number is predicted correctly).
+
+### Project Design
+In this final section, summarize a theoretical workflow for approaching a solution given the problem. Provide thorough discussion for what strategies you may consider employing, what analysis of the data might be required before being used, or which algorithms will be considered for your implementation. The workflow and discussion that you provide should align with the qualities of the previous sections. Additionally, you are encouraged to include small visualizations, pseudocode, or diagrams to aid in describing the project design, but it is not required. The discussion should clearly outline your intended workflow of the capstone project.
 
 #### Data Preprocessing
 Reading the provided CSV file produces a data frame of two variables, Id and Sequence. The Id variables are integers, and are exactly how we want them. The Sequence variable is in strings, so we will need to convert that to a list of numbers. Relative methods to deal with this kind of scenarios will be applied.
