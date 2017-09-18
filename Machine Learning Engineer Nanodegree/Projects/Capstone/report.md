@@ -239,7 +239,13 @@ def build_model(seqlen):
     return model
 ```
 
-The network architecture is "Inputs -> GRU Layer 1 of 1000 hidden units -> Dropout -> GRU Layer 2 of 1000 hidden units -> Dropout -> Time distributed dense -> Outputs".
+It's really a complication to achieve a proper training model to effectively solve the problem. For instance, the following questions were involved during the coding process:
+
+- what kind of KNN layer to use.
+- How to set relative hyperparameters (e.g., how many hidden layers should be selected).
+- Which technique to include to reduce overfitting. 
+
+After serious consideration and repeated experiments, we could get the training model for this problem. The network architecture is "Inputs -> GRU Layer 1 of 1000 hidden units -> Dropout -> GRU Layer 2 of 1000 hidden units -> Dropout -> Time distributed dense -> Outputs".
 
 After that, the classifier is trained on the preprocessed training data as described above. And then we do necessary predictions based on the training model.
 
