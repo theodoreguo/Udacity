@@ -6,15 +6,21 @@ September 3rd, 2017
 ## I. Definition
 
 ### Project Overview
-Given an integer sequence: 1, 2, 3, 4, 5, ? 
+Given an integer sequence: 1, 2, 3, 4, 5, ? So what is the next number?
 
-So what is the next number?
+If your answer is 7, You read that correctly. That's the start to a real integer sequence, the [powers of primes](https://oeis.org/A000961 "Click to check")[^fn1]. Continuously, how about the next number in 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, ? If you answered 89, you may enjoy this challenge. In this project, a machine learning solution will be demonstated to predict the next number of a given integer sequence.
 
-7! You read that correctly. That's the start to a real integer sequence, the [powers of primes](https://oeis.org/A000961 "Click to check"). Want something easier? How about the next number in 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, ? If you answered 89 (in this case this is the [Fibonacci Sequence](https://en.wikipedia.org/wiki/Fibonacci_number "Click to check")), you may enjoy this challenge. Your computer may find it considerably less enjoyable. In this project, a machine learning solution will be demonstated to predict the next number of a given integer sequence.
+A number in a sequence is equivalent to a word. Based on this observation, we try to predict the last number based on the preceding numbers. Hence, the problem can be treated as the [Natural Language Processing (NLP)](https://en.wikipedia.org/wiki/Natural_language_processing "Click to check")[^fn2] domain.
 
-[The On-Line Encyclopedia of Integer Sequences® (OEIS®)](https://oeis.org/ "Click to visit") is a 50+ year effort by mathematicians the world over to catalog sequences of integers. If it has a pattern, it's probably in the OEIS, and probably described with amazing detail.
+NLP is the computerized approach to analyzing text that is based on both a set of theories and a set of technologies. Definitionally speaking, NLP is a theoretically motivated range of computational techniques for analyzing and representing naturally occurring texts at one or more levels of linguistic analysis for the purpose of achieving human-like language processing for a range of tasks or applications. 
 
-The [dataset](https://www.kaggle.com/c/integer-sequence-learning/data "Click to download dataset") of this project contains the majority of the integer sequences from the OEIS. It is split into a training set, where you are given the full sequence, and a test set, where we have removed the last number from the sequence. The task is to predict this removed integer.
+The history of NLP generally started in the 1950s, although work can be found from earlier periods. During the 1970s, many programmers began to write "conceptual ontologies", which structured real-world information into computer-understandable data. Up to the 1980s, most NLP systems were based on complex sets of hand-written rules. 
+
+Recent research has increasingly focused on unsupervised and semi-supervised learning algorithms. Such algorithms are able to learn from data that has not been hand-annotated with the desired answers, or using a combination of annotated and non-annotated data. 
+
+In recent years, there has been a flurry of results showing deep learning techniques achieving state-of-the-art results in many natural language tasks, for example in language modeling, parsing and many others, among which, sequence prediction is different from traditional classification and regression problems. It is required to take the order of observations into account and apply models that have memory and that can learn any temporal dependence between observations.
+
+The [dataset](https://www.kaggle.com/c/integer-sequence-learning/data "Click to download dataset")[^fn3] of this project contains the majority of the integer sequences from the [On-Line Encyclopedia of Integer Sequences® (OEIS®)](https://oeis.org "Click to visit")[^fn4]. It is split into a training set, where you are given the full sequence, and a test set, where we have removed the last number from the sequence. The task is to predict this removed integer.
 
 Note that some sequences may have identical beginnings (or even be identical altogether). They have not been removed these from the dataset.
 
@@ -24,9 +30,9 @@ Note that some sequences may have identical beginnings (or even be identical alt
 - test.csv - the test set, missing the last number in each sequence
 
 ### Problem Statement
-This problem at hand is defined by Kaggle team's competition named [Integer Sequence Learning](https://www.kaggle.com/c/integer-sequence-learning "Click to visit"). It challenges you create a machine learning algorithm capable of guessing the next number in an integer sequence. While this sounds like pattern recognition in its most basic form, a quick look at the data will convince you this is anything but basic!
+This problem at hand is defined by [Kaggle](https://www.kaggle.com/ "Click to visit")[^fn5] team's competition named [Integer Sequence Learning](https://www.kaggle.com/c/integer-sequence-learning "Click to visit")[^fn6]. It challenges you create a machine learning algorithm capable of guessing the next number in an integer sequence. While this sounds like pattern recognition in its most basic form, a quick look at the data will convince you this is anything but basic!
 
-The [Recurrent Neural Networks](https://en.wikipedia.org/wiki/Recurrent_neural_network "Click to check") approach – usually just called "RNNs" - is applied to solve this problem. This task particularly interests me as it's analogous to word prediction. Hence integers are treated as words in the solution.
+The [Recurrent Neural Networks](https://en.wikipedia.org/wiki/Recurrent_neural_network "Click to check")[^fn7] approach – usually just called "RNNs" - is applied to solve this problem. This task particularly interests me as it's analogous to word prediction. Hence integers are treated as words in the solution.
 
 ### Metrics
 The evaluation metric for this problem is straightforward and simple. It is based on the accuracy of the predictions (the percentage of sequences where the next number is predicted correctly).
@@ -35,7 +41,7 @@ The evaluation metric for this problem is straightforward and simple. It is base
 ## II. Analysis
 
 ### Data Exploration
-The input dataset of this project is two CSV files for `train` and `test`. It's known that for the training set, we are given the entire sequence and for the test set the final element has been removed, which is the target we are trying to predict.
+The input datasets of this project are two CSV files for `train` and `test`. It's known that for the training set, we are given the entire sequence and for the test set the final element has been removed, which is the target we are trying to predict.
 
 Firstly, we explore the training set to understand the details using R. 
 
@@ -117,13 +123,13 @@ To get an idea of what kind of dataset we are working with, we can illustrate so
 ![](Images/First 100 Sequences on Log Scale.png)
 
 ### Algorithms and Techniques
-As mentioned above, a number in a sequence is equivalent to a word. Based on this observation, we try to predict the last number based on the preceding numbers. Hence, the problem can be treated as the [Natural Language Processing (NLP)](https://en.wikipedia.org/wiki/Natural_language_processing "Click to check") domain. 
+As mentioned above, a number in a sequence is equivalent to a word. Based on this observation, we try to predict the last number based on the preceding numbers. Hence, the problem can be treated as the Natural Language Processing (NLP) domain. 
 
-It's known that RNNs can use their internal memory to process arbitrary sequences of inputs. This makes them applicable to tasks such as unsegmented, connected [handwriting recognition](https://en.wikipedia.org/wiki/Handwriting_recognition "Click to check") or [speech recognition](https://en.wikipedia.org/wiki/Speech_recognition "Click to visit"). 
+It's known that RNNs can use their internal memory to process arbitrary sequences of inputs. This makes them applicable to tasks such as unsegmented, connected handwriting recognition or speech recognition. 
 
 Training a RNN is similar to training a traditional Neural Network. Considering the parameters are shared by all time steps in the network, the gradient at each output depends not only on the calculations of the current time step, but also the previous time steps, we use the backpropagation algorithm to deal with it. For example, in order to calculate the gradient at the 4th step, we would need to backpropagate 3 steps and sum up the gradients. This is called Backpropagation Through Time (BPTT). For now, just be aware of the fact that vanilla RNNs trained with BPTT have difficulties learning long-term dependencies (e.g., dependencies between steps that are far apart) due to what is called the vanishing/exploding gradient problem.
 
-To solve the problem, based on plain RNNs the [Gated Recurrent Units (GRUs)](https://en.wikipedia.org/wiki/Gated_recurrent_unit "Click to check") - a gating mechanism RNNs - will be used as the classifier to see if it can give reasonable prediction of a given sequence's last term in the test set ([Long Short Term Memory (LSTM) networks](https://en.wikipedia.org/wiki/Long_short-term_memory "Click to check") is also applicable but not used and discussed here).
+To solve the problem, based on plain RNNs the [Gated Recurrent Units (GRUs)](https://en.wikipedia.org/wiki/Gated_recurrent_unit "Click to check")[^fn8] - a gating mechanism RNNs - will be used as the classifier to see if it can give reasonable prediction of a given sequence's last term in the test set ([Long Short Term Memory (LSTM) networks](https://en.wikipedia.org/wiki/Long_short-term_memory "Click to check")[^fn9] is also applicable but not used and discussed here).
 
 The idea behind a GRU layer is quite similar to that of a LSTM layer, the equations are shown as follows.
 
@@ -136,7 +142,7 @@ A GRU has two gates, a reset gate `r`, and an update gate `z`.  Intuitively, the
 There’s just an additional `tanh` that squashes the output a bit. The gating mechanism is what allows GRUs to explicitly model long-term dependencies. By learning the parameters for its gates, the network learns how its memory should behave.
 
 ### Benchmark
-The `Mode` methodology is used as the benchmark model for the last number prediction in a certain sequence. For this, we simply find the mode in a given sequence, and that will be our guess for the last term in the sequence. The Mode Benchmark (implemented in R) seen on the competiton [leaderboard](https://www.kaggle.com/c/integer-sequence-learning/leaderboard "Click to check") has an accuracy of `0.05746`.
+The `Mode` methodology is used as the benchmark model for the last number prediction in a certain sequence. For this, we simply find the mode in a given sequence, and that will be our guess for the last term in the sequence. The Mode Benchmark (implemented in R) seen on the competiton [leaderboard](https://www.kaggle.com/c/integer-sequence-learning/leaderboard "Click to check")[^fn10] has an accuracy of `0.05746`.
 
 ```r
 Mode <- function(x) {
@@ -241,7 +247,7 @@ def build_model(seqlen):
 
 It's really a complication to achieve a proper training model to effectively solve the problem. For instance, the following questions were involved during the coding process:
 
-- what kind of KNN layer to use.
+- What kind of KNN layer to use.
 - How to set relative hyperparameters (e.g., how many hidden layers should be selected).
 - Which technique to include to reduce overfitting. 
 
@@ -281,7 +287,7 @@ After the optimization, the final model is derived by subsequent training proces
 ### Model Evaluation and Validation
 The metrics discussed at the beginning of the investigation (the prdiction accuracy, i.e., the percentage of sequences where the next number is predicted correctly) can be applied to judge the health and validate the designed model.
 
-The big question of this investigation, is whether this model can be used to predict the last term of a given sequence accurately. As the nature of the challenge was a contest, the predictions created by the model were submitted online on [Kaggle](https://www.kaggle.com "Click to visit") for a blind evaluation and received a decent score `0.13477`.
+The big question of this investigation, is whether this model can be used to predict the last term of a given sequence accurately. As the nature of the challenge was a contest, the predictions created by the model were submitted online on Kaggle for a blind evaluation and received a decent score `0.13477`.
 
 ![](Images/Kaggle Integer Sequence Learning Submission.png)
 
@@ -313,16 +319,16 @@ With ample time, this investigation could be expanded by experimenting with the 
 
 In addition, the parameters such as the dimensionality of the output space, activation function can be modified to achieve the optimal training model.
 
-Other classifiers are always fair contestants when trying to tackle such scale issues with larger datasets. For instance, Long Short Term Memory (LSTM) networks would be a good candidate to investigate. In addition, [Natural Language Toolkit (NLTK)](http://www.nltk.org/ "Click to visit") would be a good choice to implement NLP related projects.
+Other classifiers are always fair contestants when trying to tackle such scale issues with larger datasets. For instance, Long Short Term Memory (LSTM) networks would be a good candidate to investigate. In addition, [Natural Language Toolkit (NLTK)](http://www.nltk.org "Click to visit")[^fn11] would be a good choice to implement NLP related projects.
 
------------
-
-**Before submitting, ask yourself. . .**
-
-- Does the project report you’ve written follow a well-organized structure similar to that of the project template?
-- Is each section (particularly **Analysis** and **Methodology**) written in a clear, concise and specific fashion? Are there any ambiguous terms or phrases that need clarification?
-- Would the intended audience of your project be able to understand your analysis, methods, and results?
-- Have you properly proof-read your project report to assure there are minimal grammatical and spelling mistakes?
-- Are all the resources used for this project correctly cited and referenced?
-- Is the code that implements your solution easily readable and properly commented?
-- Does the code execute without error and produce results similar to those reported?
+[^fn1]: "Powers of primes. Alternatively, 1 and the prime powers (p^k, p prime, k >= 1). (Formerly M0517 N0185)", _https://oeis.org/A000961_
+[^fn2]: Natural language processing from Wikipedia, the free encyclopedia, _https://en.wikipedia.org/wiki/Natural_language_processing_
+[^fn3]: Kaggle Integer Sequence Learning Dataset, _https://www.kaggle.com/c/integer-sequence-learning/data_
+[^fn4]: On-Line Encyclopedia of Integer Sequences® (OEIS®) Official Website, _https://oeis.org_
+[^fn5]: Kaggle Official Website, _https://www.kaggle.com_
+[^fn6]: Kaggle Integer Sequence Learning Competition, _https://www.kaggle.com/c/integer-sequence-learning_
+[^fn7]: Recurrent Neural Networks from Wikipedia, the free encyclopedia, _https://en.wikipedia.org/wiki/Recurrent_neural_network_
+[^fn8]: Gated Recurrent Units (GRUs), _https://en.wikipedia.org/wiki/Gated_recurrent_unit_
+[^fn9]: Long Short Term Memory (LSTM) networks, _https://en.wikipedia.org/wiki/Long_short-term_memory_
+[^fn10]: Kaggle Integer Sequence Learning Competition Leaderboard, _https://www.kaggle.com/c/integer-sequence-learning/leaderboard_
+[^fn11]: Natural Language Toolkit (NLTK), _http://www.nltk.org_
