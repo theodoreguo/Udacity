@@ -159,7 +159,7 @@ To be able to predict the last term with an accuracy score above 0.20 would be s
 ## III. Methodology
 
 ### Data Preprocessing
-Reading the provided CSV file produces a data frame of two variables, Id and Sequence. The Id variables are integers, and are exactly how we want them. The Sequence variable is in strings, so we will need to convert that to a list of numbers. Combining the use of `splitlines()` and `split()` function is a simple way to make it.
+Reading the provided CSV file produces a data frame of two variables, Id and Sequence. The Id variables are integers, and are exactly how we want them. The Sequence variable is in strings, so we will need to convert that to a list of numbers. Combining the use of `splitlines()` and `split()` function is a simple way to make it (refer to Implementation section for details).
 
 ### Implementation
 During the training classifer stage, the classifier was trained on the preprocessed training data. The specific implementation is shown below. The dataset is read from the CSV file and then saved to disk as Python pickle file to be loaded for training the model subsequently.
