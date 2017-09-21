@@ -19,7 +19,7 @@ Note that some sequences may have identical beginnings (or even be identical alt
 
 ### Running Flow
 - Step 1: Download dataset and put in `data` folder
-- Step 2: Run `prepro.py` to make train/val/test data
+- Step 2: Run `prepro.py` to preprocess data
 - Step 3: Run `train.py` to train data
 - Step 4: Run `result.py` to get the final prediction result `result.csv`
  
