@@ -1,13 +1,25 @@
 # Machine Learning Engineer Nanodegree
 ## Specializations
-## Project: Capstone Proposal and Capstone Project
+## Project: Capstone Project
 
-**Note**
+### Requirements
 
-The Capstone is a two-staged project. The first is the proposal component, where you can receive valuable feedback about your project idea, design, and proposed solution. This must be completed prior to your implementation and submitting for the capstone project. 
+    Python >= 2.7.0
+    Keras >= 2.0.0
+    
+### Datasets 
 
-You can find the [capstone proposal rubric here](https://review.udacity.com/#!/rubrics/410/view), and the [capstone project rubric here](https://review.udacity.com/#!/rubrics/108/view). Please ensure that you are following directions correctly before submitting these two stages which encapsulate your capstone.
+The dataset ([download here](https://www.kaggle.com/c/integer-sequence-learning/data "Click to download dataset")) of this project contains the majority of the integer sequences from the On-Line Encyclopedia of Integer Sequences® (OEIS®). It is split into a training set, where you are given the full sequence, and a test set, where we have removed the last number from the sequence. The task is to predict this removed integer.
 
-You will find an `open_projects` folder in these files. This will be where pre-curated capstone projects are available, should you choose to work on a project already partially designed for you. 
+Note that some sequences may have identical beginnings (or even be identical altogether). They have not been removed these from the dataset.
 
-Please email [machine-support@udacity.com](mailto:machine-support@udacity.com) if you have any questions.
+#### File descriptions
+- train.csv - the training set, contains full sequences
+- test.csv - the test set, missing the last number in each sequence
+
+### Running Flow
+- Step 1: Download dataset
+- Step 2: Run `prepro.py`
+- Step 3: Run `train.py` 
+- Step 4: Run `result.py`
+ 
