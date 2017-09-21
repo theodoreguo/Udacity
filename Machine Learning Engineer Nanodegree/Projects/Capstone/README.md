@@ -18,8 +18,8 @@ Note that some sequences may have identical beginnings (or even be identical alt
 - test.csv - the test set, missing the last number in each sequence
 
 ### Running Flow
-- Step 1: Download dataset
-- Step 2: Run `prepro.py`
-- Step 3: Run `train.py` 
-- Step 4: Run `result.py`
+- Step 1: Download dataset and put in `data` folder
+- Step 2: Run `prepro.py` to make train/val/test data
+- Step 3: Run `train.py` to train data
+- Step 4: Run `result.py` to get the final prediction result `result.csv`
  
