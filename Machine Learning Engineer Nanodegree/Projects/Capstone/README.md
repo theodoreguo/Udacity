@@ -5,6 +5,7 @@
 ### Requirements
 
     Python >= 2.7.0
+    numpy >= 1.11.1
     Keras >= 2.0.0
     
 ### Datasets 
