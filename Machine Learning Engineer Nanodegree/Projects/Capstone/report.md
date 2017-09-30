@@ -75,6 +75,18 @@ head(train)
 ```
 It's obersed that each row of the data contains `Id` and `Sequence`. There are totally 113,845 sequences indicated by `Id`.
 
+```r
+# Count all numbers in training set
+train_numbers_count = str_count(train$Sequence, ',') + 1
+summary(train_numbers_count)
+```
+```
+Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+1.00   19.00   34.00   41.67   59.00  348.00 
+```
+
+From above table, we find that of all the sequences in the training set the minimum length is 1, the maximum length is 348 meanwhile the mean value of the length is 41.67.
+
 For the test set, we use the same method to explore it.
 
 ```r
@@ -108,6 +120,57 @@ head(test)
 We can see that the test set also has 113,845 sequences indicated by `Id`.
 
 Hence, it's learned that we are provided with 227,690 sequences in total from the OEIS, split 50% to 50% into a training and test set. 
+
+```r
+# Count all numbers in test set
+test_numbers_count  = str_count(test$Sequence, ',') + 1
+summary(test_numbers_count)
+```
+```
+Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+1.00   18.00   33.00   40.54   57.00  347.00
+```
+
+From above table, we find that of all the sequences in the training set the minimum length is 1, the maximum length is 347 meanwhile the mean value of the length is 40.54.
+
+To further understand the features of the provided data sets, we merge both data sets to explore more info.
+
+```
+# Merge training and test data sets
+dat = rbind(test, train)
+dat = dat[order(dat$Id), ]
+head(dat$Id, 20)
+```
+```
+[1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+```
+```
+print(object.size(dat), units = "Mb")
+```
+```
+51.8 Mb
+```
+
+After that we will find the range of the merged data set.
+
+```
+# Extract the actual numbers
+nums = strsplit(as.character(dat$Sequence), ',')
+```
+```
+max(unlist(lapply(nums, FUN = max)))
+```
+```
+[1] "999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"
+```
+```
+min(unlist(lapply(nums, FUN = min)))
+```
+```
+[1] "-1"
+```
+
+As shown above the input numbers of the sequences are ranging from "-1" to "999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999".
 
 ### Exploratory Visualization
 The sequences are made up of a linear sequences, logarithmic sequences, sequences with a modulus, and many other oddities.
