@@ -35,9 +35,18 @@ This problem at hand is defined by [Kaggle](https://www.kaggle.com/ "Click to vi
 The [Recurrent Neural Networks](https://en.wikipedia.org/wiki/Recurrent_neural_network "Click to check")[^fn7] approach – usually just called "RNNs" - is applied to solve this problem. This task particularly interests me as it's analogous to word prediction. Hence integers are treated as words in the solution.
 
 ### Metrics
-The evaluation metric for this problem is straightforward and simple. It is based on the accuracy of the predictions (the percentage of sequences where the next number is predicted correctly).
+The evaluation metric for this problem is based on the accuracy of the predictions (the percentage of sequences where the next number is predicted correctly). It can be defined as follows:
 
+$$ Pr = \frac{Nc}{Na} $$
 
+Where,
+
+- Pr: the accuracy rate of the predictions
+- Nc: the number of sequences where the next number is predicted correctly
+- Na: the total number of sequences to be tested in test set
+
+The target of the problem is to predict the each sequence's last element of the test set which has been removed, hence the metric defined above should be the most straightforward way to evaluate the performance of the designed predictive model which generates the final item of each sequence.
+ 
 ## II. Analysis
 
 ### Data Exploration
