@@ -45,7 +45,7 @@ Where,
 - _Nc_: the number of sequences where the next number is predicted correctly
 - _Nt_: the total number of sequences to be tested in test set
 
-The target of the problem is to predict the each sequence's last element of the test set which has been removed, hence the metric defined above should be the most straightforward way to evaluate the performance of the designed predictive model which generates the final item of each sequence.
+The target of the problem is to predict each sequence's last element of the test set which has been removed, hence the metric defined above should be the most straightforward way to evaluate the performance of the designed predictive model which generates the final item of each sequence.
  
 ## II. Analysis
 
