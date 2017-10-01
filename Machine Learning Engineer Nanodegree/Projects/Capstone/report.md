@@ -37,13 +37,13 @@ The [Recurrent Neural Networks](https://en.wikipedia.org/wiki/Recurrent_neural_n
 ### Metrics
 The evaluation metric for this problem is based on the accuracy of the predictions (the percentage of sequences where the next number is predicted correctly). It can be defined as follows:
 
-$$ Pr = \frac{Nc}{Na} $$
+$$ Pr = \frac{Nc}{Nt} $$
 
 Where,
 
-- Pr: the accuracy rate of the predictions
-- Nc: the number of sequences where the next number is predicted correctly
-- Na: the total number of sequences to be tested in test set
+- _Pr_: the accuracy rate of the predictions
+- _Nc_: the number of sequences where the next number is predicted correctly
+- _Nt_: the total number of sequences to be tested in test set
 
 The target of the problem is to predict the each sequence's last element of the test set which has been removed, hence the metric defined above should be the most straightforward way to evaluate the performance of the designed predictive model which generates the final item of each sequence.
  
