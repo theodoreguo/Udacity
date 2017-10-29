@@ -14,7 +14,7 @@ The dataset ([download here](https://www.kaggle.com/c/integer-sequence-learning/
 
 Note that some sequences may have identical beginnings (or even be identical altogether). They have not been removed these from the dataset.
 
-#### File descriptions
+#### File Descriptions
 - train.csv - the training set, contains full sequences
 - test.csv - the test set, missing the last number in each sequence
 
