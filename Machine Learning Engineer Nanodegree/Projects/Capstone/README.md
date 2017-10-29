@@ -14,7 +14,7 @@ The dataset ([download here](https://www.kaggle.com/c/integer-sequence-learning/
 
 Note that some sequences may have identical beginnings (or even be identical altogether). They have not been removed these from the dataset.
 
-#### File Descriptions
+### File Descriptions
 - train.csv - the training set, contains full sequences
 - test.csv - the test set, missing the last number in each sequence
 
@@ -23,4 +23,3 @@ Note that some sequences may have identical beginnings (or even be identical alt
 - Step 2: Run `prepro.py` to preprocess data
 - Step 3: Run `train.py` to train data
 - Step 4: Run `result.py` to get the final prediction result `result.csv`
- 
